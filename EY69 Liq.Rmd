@@ -1,0 +1,100 @@
+---
+title: "EY69 Liq"
+author: "Emily Yang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+
+g <- read_excel("~/Documents/Experiments/10.21.25 102 Pret Liq.xlsx", 
+    sheet = "Lum")
+h <- read_excel("~/Documents/Experiments/10.21.25 102 Pret Liq.xlsx", 
+    sheet = "OD")
+i <- read_excel("~/Documents/Experiments/10.21.25 102 Pret Liq.xlsx", 
+    sheet = "Lum OD")
+
+```
+
+```{r GFP}
+
+colors <- c("OD 1" = "seagreen","OD 0.1" = "pink")
+
+p1 <- ggplot(g, aes(x=Hours)) + 
+  geom_line(aes(y = A1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = C1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = E1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = G1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = A3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = C3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = E3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = G3, color="OD 0.1"),linewidth=1) +
+   labs(title=" P.ret 102 iLUX Lum",
+        x ="Time (hours)", y = "Lum (AU)",
+         color = "Legend") +
+    scale_color_manual(values = colors)
+p1
+#ggsave("Lum.png") 
+
+p1 <- ggplot(h, aes(x=Hours)) + 
+  geom_line(aes(y = A1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = C1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = E1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = G1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = A3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = C3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = E3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = G3, color="OD 0.1"),linewidth=1) +
+  scale_y_log10()+
+   labs(title="P.ret 102 iLUX OD",
+        x ="Time (hours)", y = "Log OD",
+         color = "Legend") +
+    scale_color_manual(values = colors)
+  p1
+#ggsave("OD.png")
+  
+
+```
+
+```{r OVL}
+colors <- c("OD 1" = "seagreen","OD 0.1" = "pink")
+r<- ggplot()+ 
+  geom_point(data = data.frame(x = h$A1, y = g$A1), aes(x = x, y = y, color="OD 1"))+
+  geom_point(data = data.frame(x = h$C1, y = g$C1), aes(x = x, y = y, color="OD 1"))+
+  geom_point(data = data.frame(x = h$E1, y = g$E1), aes(x = x, y = y, color="OD 1"))+
+  geom_point(data = data.frame(x = h$G1, y = g$G1), aes(x = x, y = y, color="OD 1"))+  
+  geom_point(data = data.frame(x = h$A3, y = g$A3), aes(x = x, y = y, color="OD 0.1"))+
+  geom_point(data = data.frame(x = h$C3, y = g$C3), aes(x = x, y = y, color="OD 0.1"))+
+  geom_point(data = data.frame(x = h$E3, y = g$E3), aes(x = x, y = y, color="OD 0.1"))+
+  geom_point(data = data.frame(x = h$G3, y = g$G3), aes(x = x, y = y, color="OD 0.1"))+
+ labs(title="P.ret 102 iLUX OVL",
+        x ="Optical Density", y = "GFP (AU)", color = "Legend") +
+    scale_color_manual(values = colors)
+r
+
+#ggsave("OVL.png")
+
+```
+
+```{r}
+p1 <- ggplot(i, aes(x=Hours)) + 
+  geom_line(aes(y = A1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = C1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = E1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = G1, color="OD 1"),linewidth=1) +
+  geom_line(aes(y = A3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = C3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = E3, color="OD 0.1"),linewidth=1) +
+  geom_line(aes(y = G3, color="OD 0.1"),linewidth=1) +
+   labs(title="P.ret 102 iLUX Lum/OD",
+        x ="Time (hours)", y = "Lum/OD",
+         color = "Legend") +
+    scale_color_manual(values = colors)
+p1
+#ggsave("LO.png")
+```
