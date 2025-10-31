@@ -54,23 +54,24 @@ h <- h %>%
 ```{r}
 
 p <- ggplot(h, aes(x=Hours)) + 
-  geom_line(aes(y = A3), color="steelblue") + 
-  geom_line(aes(y = A5), color="steelblue") + 
-  geom_line(aes(y = C3), color="steelblue") +
-  geom_line(aes(y = C5), color="steelblue") +
-  geom_line(aes(y = E1), color="steelblue") + 
-  geom_line(aes(y = E3), color="steelblue") +
-  geom_line(aes(y = E5), color="steelblue") +
-  geom_line(aes(y = G1), color="steelblue") +
-  geom_line(aes(y = G3), color="steelblue") +
-  geom_line(aes(y = G5), color="steelblue")+
-  geom_line(aes(y = A12), color="black") + 
-  geom_line(aes(y = C12), color="black")+
-  geom_line(aes(y = E12), color="black")+
-  geom_line(aes(y = G12), color="black")
+  geom_line(aes(y = A3), color="steelblue", size=1) + 
+  geom_line(aes(y = A5), color="steelblue", size=1) + 
+  geom_line(aes(y = C3), color="steelblue", size=1) +
+  geom_line(aes(y = C5), color="steelblue", size=1) +
+  geom_line(aes(y = E1), color="steelblue", size=1) + 
+  geom_line(aes(y = E3), color="steelblue", size=1) +
+  geom_line(aes(y = E5), color="steelblue", size=1) +
+  geom_line(aes(y = G1), color="steelblue", size=1) +
+  geom_line(aes(y = G3), color="steelblue", size=1) +
+  geom_line(aes(y = G5), color="steelblue", size=1)+
+  geom_line(aes(y = A12), color="black", size=1) + 
+  geom_line(aes(y = C12), color="black", size=1)+
+  geom_line(aes(y = E12), color="black", size=1)+
+  geom_line(aes(y = G12), color="black", size=1)
   
-p <- p +labs(title="102 P.ret",
-        x ="Time (hours)", y = "Luminescence (AU)")
+p <- p +labs(title="102 GFP S.marcescens ",
+        x ="Time (hours)", y = "Luminescence (AU)")+
+  theme_grey(base_size = 20)
 p
-#ggsave("Smar.png")
+#ggsave("SmarSeminar.png")
 ```

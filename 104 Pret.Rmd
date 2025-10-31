@@ -18,6 +18,8 @@ h <- read_excel("~/Documents/Experiments/10.23.25 P.ret.xlsx",
     sheet = "OD")
 i <- read_excel("~/Documents/Experiments/10.23.25 P.ret.xlsx", 
     sheet = "Lum OD")
+j <- read_excel("~/Documents/Experiments/10.23.25 P.ret.xlsx", 
+    sheet = "Avg Lum")
 
 ```
 
@@ -131,4 +133,21 @@ p1 <- ggplot(i, aes(x=Hours)) +
     scale_color_manual(values = colors)
 p1
 #ggsave("104LO.png")
+```
+
+````{r}
+colors <- c("102-0.1" = "seagreen","102-1" = "pink", "104-0.1" = "orange", "104-1" = "lightblue")
+
+p1 <- ggplot(j, aes(x=Hours)) + 
+  geom_line(aes(y = A1, color="102-1"),linewidth=1) +
+  geom_line(aes(y = C1, color="102-0.1"),linewidth=1) +
+  geom_line(aes(y = E1, color="104-1"),linewidth=1) +
+  geom_line(aes(y = G1, color="104-0.1"),linewidth=1) +
+  labs(title="iLUX P. rettgeri",
+        x ="Time (hours)", y = "Lum (AU)",
+         color = "Legend") +
+    scale_color_manual(values = colors)+
+  theme_grey(base_size = 15)
+p1
+#ggsave("P.retSeminar.png") 
 ```
